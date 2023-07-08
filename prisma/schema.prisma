@@ -33,7 +33,7 @@ model Comment {
   description String
   author      User    @relation(fields: [authorId], references: [id])
   authorId    String
-  file        File    @relation(fields: [fileId], references: [id])
+  file        File    @relation(fields: [fileId], references: [id], onDelete: Cascade)
   fileId      String
   createdAt   DateTime  @default(now())
 }
