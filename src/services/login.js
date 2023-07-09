@@ -19,7 +19,6 @@ const login = async (email, password) => {
     throw new Error('Invalid password');
   }
 
-  // will send user in the token
   const token = jwt.sign({ user }, process.env.JWT_SECRET, {
     expiresIn: '1d',
   });
