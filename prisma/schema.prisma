@@ -14,7 +14,7 @@ model User {
   id     String  @id @default(uuid())
   email  String  @unique
   password  String
-  name   String?
+  name   String
   files  File[]
   comments  Comment[]
 }

@@ -1,8 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const { login } = require('./routes/login');
-const { register } = require('./routes/register');
+const login = require('./routes/login');
+const register = require('./routes/register');
 const handleErrors = require('./middlewares/error');
 
 require('dotenv').config();
