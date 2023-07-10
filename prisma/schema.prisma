@@ -11,17 +11,20 @@ datasource db {
 }
 
 model User {
-  id     String  @id @default(uuid())
-  email  String  @unique
+  id        String  @id @default(uuid())
+  email     String  @unique
   password  String
-  name   String?
-  files  File[]
+  name      String
+  files     File[]
   comments  Comment[]
+  storage   Int @default(0)
 }
 
 model File {
   id        String    @id @default(uuid())
-  url       String
+  name      String
+  size      Int
+  data      Bytes
   author    User      @relation(fields: [authorId], references: [id])
   authorId  String    
   comments  Comment[] 
