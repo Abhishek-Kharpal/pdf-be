@@ -1,4 +1,4 @@
-const { jwt } = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const verifyToken = async (req, res, next) => {
   try {
@@ -8,11 +8,12 @@ const verifyToken = async (req, res, next) => {
         message: 'No token provided',
       });
     }
-    jwt.verify((error, decoded) => {
+
+    jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
       if (error) {
         throw new Error('Invalid token');
       }
-      req.user = decoded.user;
+      req.userID = decoded.id;
     });
     next();
   } catch (err) {
