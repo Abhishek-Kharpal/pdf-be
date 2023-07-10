@@ -4,10 +4,11 @@ const uploadFile = async (req, res, next) => {
   try {
     const { userID } = req;
     const { file } = req;
-    const uploadedFile = await fileService.uploadFile(file, userID);
+    const { updatedUser, uploadFile } = await fileService.uploadFile(file, userID);
     res.status(200).json({
       message: 'File uploaded successfully',
-      uploadedFile,
+      updatedUser,
+      uploadFile,
     });
   } catch (err) {
     next(err);

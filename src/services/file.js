@@ -35,16 +35,26 @@ const uploadFile = async (file, userID) => {
     },
   });
 
-  await prisma.user.update({
+  const updatedUser = await prisma.user.update({
     where: {
       id: userID,
     },
     data: {
       storage: user.storage + file.size,
     },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      files: true,
+      storage: true,
+    },
   });
 
-  return uploadedFile;
+  return {
+    uploadedFile,
+    updatedUser,
+  };
 };
 
 module.exports = {
