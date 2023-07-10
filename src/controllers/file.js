@@ -15,6 +15,20 @@ const uploadFile = async (req, res, next) => {
   }
 };
 
+const getFileByID = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const file = await fileService.getFileByID(id);
+    res.status(200).json({
+      message: 'File fetched successfully',
+      file,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   uploadFile,
+  getFileByID,
 };

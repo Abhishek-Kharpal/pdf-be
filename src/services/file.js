@@ -57,6 +57,29 @@ const uploadFile = async (file, userID) => {
   };
 };
 
+const getFileByID = async (id) => {
+  const file = await prisma.file.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+      name: true,
+      size: true,
+      data: true,
+      author: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      comments: true,
+    },
+  });
+  return file;
+};
+
 module.exports = {
   uploadFile,
+  getFileByID,
 };

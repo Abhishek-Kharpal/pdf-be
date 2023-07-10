@@ -1,9 +1,9 @@
 const { prisma } = require('../utils/prismaUtil');
 
-const createComment = async (description, postId, userId) => {
+const createComment = async (description, fileID, userID) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: userId,
+      id: userID,
     },
   });
   if (!user) {
@@ -12,7 +12,7 @@ const createComment = async (description, postId, userId) => {
 
   const file = await prisma.file.findUnique({
     where: {
-      id: fileId,
+      id: fileID,
     },
   });
   if (!file) {
@@ -24,12 +24,12 @@ const createComment = async (description, postId, userId) => {
       description,
       author: {
         connect: {
-          id: userId,
+          id: userID,
         },
       },
-      post: {
+      file: {
         connect: {
-          id: postId,
+          id: fileID,
         },
       },
     },
