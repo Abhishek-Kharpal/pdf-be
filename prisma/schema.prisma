@@ -24,7 +24,7 @@ model File {
   id        String    @id @default(uuid())
   name      String
   size      Int
-  url       String
+  data      Bytes
   author    User      @relation(fields: [authorId], references: [id])
   authorId  String    
   comments  Comment[] 

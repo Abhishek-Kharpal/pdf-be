@@ -1,15 +1,19 @@
 const fileService = require('../services/file');
 
-const getFilesByUser = async (req, res, next) => {
+const uploadFile = async (req, res, next) => {
   try {
-    const { user } = req;
-    const files = await fileService.getFilesByUser(user);
-    res.status(200).json(files);
-  } catch (error) {
-    next(error);
+    const { userID } = req;
+    const { file } = req;
+    const uploadedFile = await fileService.uploadFile(file, userID);
+    res.status(200).json({
+      message: 'File uploaded successfully',
+      uploadedFile,
+    });
+  } catch (err) {
+    next(err);
   }
 };
 
 module.exports = {
-  getFilesByUser,
+  uploadFile,
 };
