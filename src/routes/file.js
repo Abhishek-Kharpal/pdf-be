@@ -9,4 +9,6 @@ router.route('/upload').post(upload.single('file'), fileController.uploadFile);
 
 router.route('/:id').get(fileController.getFileByID);
 
+router.route('/share/:id').post(fileController.shareFile);
+
 module.exports = router;

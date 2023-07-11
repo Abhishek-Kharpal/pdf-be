@@ -5,7 +5,7 @@ const uploadFile = async (req, res, next) => {
     const { userID } = req;
     const { file } = req;
     const { updatedUser, uploadFile } = await fileService.uploadFile(file, userID);
-    res.status(200).json({
+    res.status(201).json({
       message: 'File uploaded successfully',
       updatedUser,
       uploadFile,
@@ -28,7 +28,23 @@ const getFileByID = async (req, res, next) => {
   }
 };
 
+const shareFile = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userID } = req;
+    const { email } = req.body;
+    const { updatedUser } = await fileService.shareFile(id, userID, email);
+    res.status(201).json({
+      message: 'File shared successfully',
+      updatedUser,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   uploadFile,
   getFileByID,
+  shareFile,
 };
